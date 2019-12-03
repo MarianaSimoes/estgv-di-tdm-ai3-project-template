@@ -35,7 +35,12 @@ export class UserApiService implements IUserService {
     filter?: Api.IUserFilter
   ): Observable<Api.IUser[]> {
     const listUsersUrl = this.buildApiUrl({ queryParams: filter});
-    return this.httpClient.get<Api.IUser[]>(listUsersUrl);
+    return this.httpClient.get<Api.IUser[]>(
+      listUsersUrl, {
+        headers: {
+          "Authorization": 'Bearer ${token}'
+        }
+      });
   }
 
   /** @inheritdoc */
